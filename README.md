@@ -1,2 +1,2 @@
-# imap-structure-parser
+# Email Structure Parser
 Parses the structure of multipart emails
