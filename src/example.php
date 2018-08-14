@@ -11,7 +11,7 @@ $imapStream = imap_open('{outlook.office365.com:993/ssl/novalidate-cert}INBOX', 
 $msgNums = imap_search($imapStream, 'ALL');
 $msgNum = $msgNums[0];
 
-// Load message into parse
+// Load message into parser
 $parser = new EmailStructureParser($imapStream, $msgNum);
 
 // Get parsed multipart email parts - including plain text and/or HTML content, and any attachments
