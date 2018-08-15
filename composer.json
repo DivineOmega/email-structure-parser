@@ -1,6 +1,6 @@
 {
     "name": "divineomega/email-structure-parser",
-    "description": "Email Structure Parser",
+    "description": "Given an IMAP stream and a message number, this library will parse the structure of multipart emails.",
     "type": "library",
     "license": "LGPL-3.0-only",
     "authors": [
