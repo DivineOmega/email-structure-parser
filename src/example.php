@@ -21,6 +21,6 @@ $parts = $parser->getParts();
 var_dump($parts['TEXT/HTML']);
 
 // Save attached PNG images
-foreach($parts['IMAGE/PNG'] as $key => $image) {
-    file_put_contents($key.'.png', $image);
+foreach($parts['IMAGE/PNG'] as $image) {
+    file_put_contents($image->name, $image->content);
 }

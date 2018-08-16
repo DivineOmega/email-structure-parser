@@ -82,16 +82,35 @@ class EmailStructureParser
                 else
                 {
                     $mimeType = $this->getMimeType($substructure);
-                    $returnParts[$mimeType][] = $this->getPartByPartNumber($substructure, $partToGet);
+                    $name = $this->getParameterValue($substructure, 'name');
+                    $content = $this->getPartByPartNumber($substructure, $partToGet);
+                    $returnParts[$mimeType][] = new Part($name, $content);
                 }
             }
         }
         else
         {
             $mimeType = $this->getMimeType($structure);
-            $returnParts[$mimeType][] = $this->getPartByPartNumber($structure, 1);
+            $name = $this->getParameterValue($structure, 'name');
+            $content = $this->getPartByPartNumber($structure, 1);
+            $returnParts[$mimeType][] = new Part($name, $content);
         }
 
+    }
+
+    private function getParameterValue($structure, $parameterName)
+    {
+        if (!isset($structure->parameters) || !is_array($structure->parameters)) {
+            return null;
+        }
+
+        foreach($structure->parameters as $parameter) {
+            if (strtolower($parameter->attribute) === strtolower($parameterName)) {
+                return $parameter->value;
+            }
+        }
+
+        return null;
     }
 
     /**
