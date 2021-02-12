@@ -47,3 +47,18 @@ foreach($parts['IMAGE/PNG'] as $image) {
     file_put_contents($image->name, $image->content);
 }
 ```
+
+## Content IDs
+
+Some emails embed images into the html content using "cid:" urls; these URLs link to the content ID of another part within the email rather than being a URL that can be resolved normally.
+
+If one exists, this content ID will be exposed via the `contentId` property of the `Part`:
+
+```php
+foreach($parts['IMAGE/PNG'] as $image) {
+    // Store the file as in the above example:
+    file_put_contents($image->name, $image->content);
+    // You would then want to store this relationship in your database:    
+    echo "{$image->contentId} => {$image->name}\n";
+}
+```
