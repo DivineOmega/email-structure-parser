@@ -50,7 +50,7 @@ foreach($parts['IMAGE/PNG'] as $image) {
 
 ## Content IDs
 
-Some emails embed images into the html content using "cid:" urls; these URLs link to the content ID of another part within the email rather than being a URL that can be resolved normally.
+Some emails embed images into the HTML content using `cid:` urls. These URLs link to the content ID of another part within the email, rather than being an absolute `https://` URL that can be resolved normally.
 
 If one exists, this content ID will be exposed via the `contentId` property of the `Part`:
 
