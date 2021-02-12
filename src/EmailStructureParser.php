@@ -83,8 +83,9 @@ class EmailStructureParser
                 {
                     $mimeType = $this->getMimeType($substructure);
                     $name = $this->getParameterValue($substructure, 'name');
+                    $contentId = $this->getPartContentId($substructure);
                     $content = $this->getPartByPartNumber($substructure, $partToGet);
-                    $returnParts[$mimeType][] = new Part($name, $content);
+                    $returnParts[$mimeType][] = new Part($name, $content, $contentId);
                 }
             }
         }
@@ -92,8 +93,9 @@ class EmailStructureParser
         {
             $mimeType = $this->getMimeType($structure);
             $name = $this->getParameterValue($structure, 'name');
+            $contentId = $this->getPartContentId($structure);
             $content = $this->getPartByPartNumber($structure, 1);
-            $returnParts[$mimeType][] = new Part($name, $content);
+            $returnParts[$mimeType][] = new Part($name, $content, $contentId);
         }
 
     }
@@ -135,6 +137,18 @@ class EmailStructureParser
                 return $text;
                 break;
         }
+    }
+
+    /**
+     * @param $structure
+     * @return string
+     */
+    private function getPartContentId($structure) {
+        if(isset($structure->id)) {
+            // Content IDs are wrapped in <>, so we remove these:
+            return preg_replace('/[<>]/', '', $structure->id);
+        }
+        return null;
     }
 
     /**
